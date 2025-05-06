@@ -7,6 +7,7 @@
     --elipse: linear-gradient(black 50%, transparent 50%);
     --secondary-color: #609987;
     --primary-color: #192c26;
+    --removable: #939393;
 }
 
 .primary-font{
@@ -26,3 +27,7 @@
     background-color: var(--primary-color);
     color: var(--primary-color)
 } 
+
+.removable{
+    color: var(--removeable);
+}
