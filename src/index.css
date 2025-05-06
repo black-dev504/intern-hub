@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+
+
+@theme{
+    --primary-font: 'Red Hat Display','san serif';
+    --elipse: linear-gradient(black 50%, transparent 50%);
+    --secondary-color: #609987;
+    --primary-color: #192c26;
+}
+
+.primary-font{
+    font-family: var(--primary-font);
+}
+
+.elipse{
+    background: var(--elipse);
+    rotate: 320deg;
+}
+
+.bg-secondary{
+    background-color: var(--secondary-color);
+}
+
+.primary-color{
+    background-color: var(--primary-color);
+    color: var(--primary-color)
+} 
