@@ -2,9 +2,9 @@ import React from 'react'
 
 const Hero = () => {
   return (
-<section className='pl-25 pr-10 pt-8'>
+<section className='pl-25 pr-25 pt-8'>
     <div className='grid grid-cols-2 max-w-[1300px] mx-auto'>
-        <div className='flex mt-35 flex-col min-w-[600px]'>
+        <div className='flex mt-35 flex-col '>
             <h1 className='text-[50px] font-black'>Transform Your Future with Top IT Opportunities</h1>
             <p className='text-xl font-normal mt-3 mb-9'>Explore top Industrial Training (IT) placements with leading Nigerian startups and take your career to the next level.</p>
             <div className='rounded-[53px] p-4 flex justify-between shadow-lg drop-shadow-lg'>
