@@ -14,23 +14,35 @@ const Login = () => {
         password:'',
         skills: []
     })
-
-    function addSkill(event){
-        
-        if (event.key === ',' || event.key === 'Enter'){
-            let entry = event.target.value
-             event.target.value = ''
-            setData((prevValue)=>{
+    function addSkill(event) {
+        if ((event.key === ' ' || event.key === 'Enter') && event.target.value.trim()) {
+            const entry = event.target.value.trim(); 
+            event.target.value = ''; 
+        setData((prevValue) => {
+            if (!prevValue.skills.includes(entry)) {
                 return {
-                    email: prevValue.email,
-                    password: prevValue.password,
-                    skills: [entry, ...data.skills ]
-                }
-
+                    ...prevValue,
+                    skills: [entry, ...prevValue.skills],
+                };
             }
-            )
+            return prevValue;
+        });
         }
-            
+    }
+
+    function removeSkill(skillToRemove){
+
+        setData((prevValue)=>{
+            return {
+                email: prevValue.email,
+                password: prevValue.password,
+                skills: data.skills.filter((skill)=>(skill != skillToRemove))
+                
+            }
+
+        }
+        )
+       
     }
     
   return (
@@ -76,7 +88,7 @@ const Login = () => {
                     </div>:null}
                     <div className='inline-block mb-3'>
                     {data.skills.map((skill,index) =>(
-                      <Skillpills skill={skill} key={index} /> 
+                      <Skillpills skill={skill} key={index} onRemove={removeSkill}/> 
 
                     ))}
                      </div>
