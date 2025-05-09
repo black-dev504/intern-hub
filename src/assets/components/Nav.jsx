@@ -2,7 +2,7 @@ import React from 'react';
 
 const Nav = () => {
   return (
-    <nav className='bg-white px-25 py-6 flex justify-between items-center primary-font'>
+    <nav className='bg-white px-20 py-6 flex justify-between items-center primary-font'>
       <div className='flex items-center gap-3'>
         <img src='/icons/logo.svg' alt="logo" className="w-10 h-10" />
         <h1 className='text-black font-bold text-2xl'>Internship Hut</h1>
