@@ -20,9 +20,9 @@ const Offer = (props) => {
                     </div>
                         ))}
 
-                        {props.price? <div className='flex items-center'> <div className='w-[7px] h-[7px] bg-[#939393] rounded-[50px] mx-3'></div> 
+                        {props.paid? <div className='flex items-center'> <div className='w-[7px] h-[7px] bg-[#939393] rounded-[50px] mx-3'></div> 
                                           <p className='removable text-[16px] font-bold'>{props.price}</p>  </div>
-                                     : <div className='flex items-center'> <div className='w-[7px] h-[7px] bg-[#939393] rounded-[50px] mx-3'></div>          
+                                     : <div className='flex-items flex items-center'> <div className='w-[7px] h-[7px] bg-[#939393] rounded-[50px] mx-3'></div>          
                                      <div className='rounded-[20px] max-w-[80px] bg-[#939393] removable '><div className='bg-white opacity-[50%] py-[2px] px-3'>Unpaid</div></div>
              </div>}
                        
