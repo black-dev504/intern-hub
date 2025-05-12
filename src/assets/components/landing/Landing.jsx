@@ -1,11 +1,21 @@
 import React from 'react'
 import Hero from './Hero'
 import Cta from './Cta'
+import Carousel from './Carousel'
+import Ready from './Ready'
+import Sponsor from './Sponsor'
+import Testimonial from '../Homepage/Testimonial'
 const Home = () => {
+  
   return (
-    <div className='max-w-[1300px]'>
+    <div className=''>
       <Hero />
       <Cta />
+      <Carousel />
+      <Ready />
+      <Sponsor />
+      <Testimonial />
+      
     </div>
   )
 }

@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 
 @theme{
@@ -8,11 +9,19 @@
     --secondary-color: #609987;
     --primary-color: #192c26;
     --removeable: #939393;
+    --quicksand: '"Quicksand", sans-serif';
+    --shadow-custom: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15)
 }
 
 .primary-font{
     font-family: var(--primary-font);
 }
+
+.hover\:bg-secondary:hover {
+    background-color: #609987; 
+    color: white
+}
+
 
 .elipse{
     background: var(--elipse);
@@ -22,6 +31,9 @@
 .bg-secondary{
     background-color: var(--secondary-color);
 }
+.text-secondary{
+    color: var(--secondary-color);
+}
 
 .primary-color{
     background-color: var(--primary-color);
@@ -30,4 +42,12 @@
 
 .removable{
     color: var(--removeable);
+}
+
+.profile-font{
+    font-family: var(--quicksand);
+}
+
+.shadow-custom{
+    box-shadow: var(--shadow-custom);
 }

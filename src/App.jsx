@@ -13,7 +13,7 @@ const App = () => {
       <div className="primary-font w-full mx-auto overflow-hidden">
       <Nav />
       <Routes>
-        <Route path="/" element={<Editprofile />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Login />} />
 
