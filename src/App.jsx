@@ -5,6 +5,7 @@ import Landing from './assets/components/landing/Landing';
 import About from './assets/components/About';
 import Login from './assets/components/Login';
 import Home from './assets/components/Homepage/Home'
+import Editprofile from './assets/components/Profile/Editprofile';
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <div className="primary-font w-full mx-auto overflow-hidden">
       <Nav />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Editprofile />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Login />} />
 
