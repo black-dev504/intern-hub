@@ -44,7 +44,7 @@ const Cta = () => {
     return (
         <div>
         <section className="bg-secondary ">
-                        <div className=" bg-white px-25 opacity-85 z-0">
+                        <div className=" bg-white px-5 lg:px-25 opacity-85 z-0">
 
             <div className="flex flex-col items-center max-[1000px] mx-auto">
                 <h1 className="font-bold text-5xl mt-6 mb-14">How It Works</h1>

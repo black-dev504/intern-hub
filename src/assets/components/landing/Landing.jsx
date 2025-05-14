@@ -4,7 +4,7 @@ import Cta from './Cta'
 import Carousel from './Carousel'
 import Ready from './Ready'
 import Sponsor from './Sponsor'
-import Testimonial from '../Homepage/Testimonial'
+import Testimonial from './Testimonial'
 const Home = () => {
   
   return (

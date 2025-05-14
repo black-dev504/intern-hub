@@ -1,46 +1,70 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { useLocation } from 'react-router-dom';
 import Skillpills from './Skillpills';
+import {login as userLogin} from '../../auth'
+import {signup as userSignUp} from '../../auth'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../AuthProvider';
+
 
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [skills,setSkills] = useState([])
+    const [error, setError] = useState('');
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const location = useLocation();
     let signup = true
     if( location.pathname === '/login'){
         signup = false
     }
-    const [data, setData] = React.useState({
-        email:'',
-        password:'',
-        skills: []
-    })
+    
+
+    const handleSignUp = async (e) =>{
+        e.preventDefault();
+        try{
+            const response = await userSignUp({email,password,skills})
+            navigate('/login')
+        }
+        catch (err){
+            setError(err)
+            console.log(error);
+            
+        }
+    }
+
+    const handleLogin = async (e) =>{
+        e.preventDefault()
+        try{
+        const response = await userLogin({email,password})
+        login(response.user)
+        navigate('/home')
+        }
+     catch (err) {
+      setError(err);
+      console.log(error);
+      
+     }
+    }
     function addSkill(event) {
         if ((event.key === ' ' || event.key === 'Enter') && event.target.value.trim()) {
             const entry = event.target.value.trim(); 
             event.target.value = ''; 
-        setData((prevValue) => {
-            if (!prevValue.skills.includes(entry)) {
-                return {
-                    ...prevValue,
-                    skills: [entry, ...prevValue.skills],
-                };
+             if (!skills.includes(entry)) {
+               setSkills((prevValue)=>[entry, ...prevValue])
             }
-            return prevValue;
-        });
+            
+            return
+       
         }
     }
 
     function removeSkill(skillToRemove){
 
-        setData((prevValue)=>{
-            return {
-                email: prevValue.email,
-                password: prevValue.password,
-                skills: data.skills.filter((skill)=>(skill != skillToRemove))
-                
-            }
-
-        }
+        setSkills(()=> skills.filter((skill)=>(skill != skillToRemove))
         )
        
     }
@@ -49,8 +73,8 @@ const Login = () => {
     <section className='grid grid-cols-1 lg:grid-cols-2'>
         <div className='py-12 px-6 '>
             {signup?            
-             <p className='justify-end removable flex'>Have an account?<span className='font-bold text-primary-color'><a href="/login">Log in</a></span></p>:
-             <p className='justify-end removable flex'>Dont have an account?<span className='font-bold text-primary-color'><a href="/signup">Sign up</a></span></p>
+             <p className='justify-end removable flex'>Have an account?<span className='font-bold text-[#192c26]'><a href="/login">Log in</a></span></p>:
+             <p className='justify-end removable flex'>Dont have an account?<span className='font-bold text-[#192c26]'><a href="/signup">Sign up</a></span></p>
 
  }
             <div className='md:mx-10 my-10 lg:my-30 flex flex-col'>
@@ -65,10 +89,12 @@ const Login = () => {
                 </div>}
                
             
+                <form className='mt-5 flex flex-col justify-between' onSubmit={signup ? handleSignUp : handleLogin}>
 
                 <div className='mt-5 flex flex-col justify-between'>
+                    {error && <p className='mb-4 text-red-500'>Invalid email or password</p>}
                     <div className='relative'>
-                        <input type="text" className='w-full mb-8 border-1 border-[#939393] pl-2 py-3 rounded-[4px] removable' placeholder='example@email.com'/>
+                        <input onChange={(e)=> setEmail(e.target.value)} type="text" className='w-full mb-8 border-1 border-[#939393] pl-2 py-3 rounded-[4px] removable' placeholder='example@email.com'/>
                         <label className=" text-[#192c26]  absolute bottom-18 left-4 px-2 font-normal text-[16px] bg-white block" htmlFor="email">Email</label>
 
                     </div>
@@ -76,7 +102,7 @@ const Login = () => {
                         <a href="" className='hover:underline hover:text-blue-500 text-black mb-2'>Forgot Password?</a>
                     </div>}
                     <div className='relative'>
-                        <input type="text" className='w-full border-[#939393] mb-8 border-1 pl-2 py-3 rounded-[4px] removable' placeholder='6+ strong password'/>
+                        <input onChange={(e)=> setPassword(e.target.value)} type="text" className='w-full border-[#939393] mb-8 border-1 pl-2 py-3 rounded-[4px] removable' placeholder='6+ strong password'/>
                         <label className="absolute bottom-18 left-4 px-2 font-normal text-[16px] bg-white block" htmlFor="password">Password</label>
 
                     </div>
@@ -87,7 +113,7 @@ const Login = () => {
 
                     </div>:null}
                     <div className='inline-block mb-3'>
-                    {data.skills.map((skill,index) =>(
+                    {skills.map((skill,index) =>(
                       <Skillpills skill={skill} key={index} onRemove={removeSkill}/> 
 
                     ))}
@@ -124,6 +150,7 @@ const Login = () => {
 
 
                 </div>
+                </form>
             </div>
         </div>
 

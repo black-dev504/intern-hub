@@ -36,7 +36,7 @@ const data = [
 
 const Carousel = () => {
   return (
-<section className='primary-font px-25  '>
+<section className='primary-font px-5 lg:px-25  '>
 
      <div className='w-full justify-center text-center flex items-center '>
         <h1 className='text-[#252525] text-4xl font-black '>Why Choose Our Platform?</h1>

@@ -42,7 +42,7 @@ const Sponsor = () => {
             <h1 className="text-[#252525] text-4xl font-black">Our Sponsor</h1>
             <div className="mt-8 mb-18 flex w-full gap-[10px] [&::-webkit-scrollbar]:hidden overflow-x-auto px-4">
                 {data.map((item, index) =>  {
-                    return <div key={index} className="px-32 py-12 mr-6 flex rounded-[20px] min-w-[30%] " style={{ backgroundColor: item.color }}>
+                    return <div key={index} className="px-4 py-2 lg:px-32 lg:py-12 mr-6 flex rounded-[20px] min-w-[30%] " style={{ backgroundColor: item.color }}>
                        <img 
                             src={item.img}
                             alt={`Sponsor logo ${index + 1}`}
