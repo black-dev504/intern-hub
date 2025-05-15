@@ -1,56 +1,74 @@
 import mongoose from 'mongoose'
 import express from 'express';
-import bodyParser from 'body-parser'
 import cors from 'cors'
+import passport from 'passport';
+import passportLocalMongoose from 'passport-local-mongoose';
+import session from 'express-session';
 
 const app = express();
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: 'http://localhost:5173'
-}))
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
-mongoose.connect("mongodb://localhost:27017/interndb") 
+mongoose.connect("mongodb://localhost:27017/interndb");
 
+// Session
+app.use(session({
+  secret: 'yourSecretKey',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Schema
 const userDataSchema = new mongoose.Schema({
-   email:{
-      type:String,
-      required:[true,'please check ur data entry no email specified']
-  },
-     password:{
-      type:String,
-      required:[true,'please check ur data entry no password specified']
-  },
-     skills:{
-      type:Array,
-  }
+   email: {
+     type: String,
+     required: [true, 'Please provide an email'],
+     unique: true
+   },
+   password: {
+     type: String
+   },
+   skills: {
+     type: Array
+   }
+});
 
-})
-    
+// Plugin
+userDataSchema.plugin(passportLocalMongoose, {
+  usernameField: 'email'
+});
 
 const User = mongoose.model('User', userDataSchema);
 
-app.post('/login', async (req,res)=>{
-    const {email, password} = req.body
-    const foundUser = await User.findOne({email,password})
-    if (!foundUser) {
-        return res.status(402).json({error:'Invalid email or password'})
-    }
-    res.json({user:foundUser})
-    res.sendStatus(200);
-    
-})
+// Passport config
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
+// Routes
 app.post('/signup', async (req, res) => {
-  const { email, password, skills } = req.body;
-  const existing = await User.findOne({ email });
-  if (existing) {
-    return res.status(400).json({ error: 'User already exists' });
+  try {
+    const { email, password,skills } = req.body;
+    const user = await User.register(new User({ email,skills }), password);
+    res.status(200).json({ message: 'User registered', user });
+  } catch (err) {
+    console.log(err.message)
+    res.status(400).json({ error: err.message });
   }
-  const newUser = new User({ email, password, skills });
-  await newUser.save();
-  res.status(201).json({ user: newUser });
+});
+
+app.post('/login', passport.authenticate('local'), (req, res) => {
+  res.status(200).json({ message: 'Login successful', user: req.user });
 });
 
 app.listen(5000, () => {

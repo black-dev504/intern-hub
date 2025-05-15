@@ -9,7 +9,7 @@ const Home = () => {
    const {user} = useAuth()
 
   return (
-    <section className='px-20 bg-white '>
+    <section className='md:px-20 px-5 bg-white '>
         <div className='flex flex-col'>
             <h1 className='text-black text-4xl font-semibold'>Find your perfect IT placement</h1>
             <div className='flex justify-between'>

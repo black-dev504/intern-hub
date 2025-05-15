@@ -39,21 +39,21 @@ const Login = () => {
     const handleLogin = async (e) =>{
         e.preventDefault()
         try{
-        const response = await userLogin({email,password})
-        login(response.user)
-        navigate('/home')
+            const response = await userLogin({email,password})
+            login(response.user)
+            navigate('/home')
         }
      catch (err) {
-      setError(err);
-      console.log(error);
-      
+            setError(err);
+            console.log(error);
+            
      }
     }
     function addSkill(event) {
         if ((event.key === ' ' || event.key === 'Enter') && event.target.value.trim()) {
             const entry = event.target.value.trim(); 
             event.target.value = ''; 
-             if (!skills.includes(entry)) {
+            if (!skills.includes(entry)) {
                setSkills((prevValue)=>[entry, ...prevValue])
             }
             

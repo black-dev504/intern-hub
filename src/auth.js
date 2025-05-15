@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000' // <-- ensure this matches your server
+  baseURL: 'http://localhost:5000' 
 });
 
 export const login = async (credentials) => {

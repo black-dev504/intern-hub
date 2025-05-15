@@ -3,7 +3,7 @@ import React from 'react'
 const Options = (props) => {
   return (
     <div>
-       <div className='flex flex-col mt-2 '>
+       <div className='flex lg:flex-col mt-2 '>
                 <h1 className='font-bold text-xl'>{props.title}</h1>
              
                 <div>

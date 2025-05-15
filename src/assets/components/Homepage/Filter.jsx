@@ -19,7 +19,7 @@ const Filter = (props) => {
 ]
   return (
     <div className=''>
-                <div className=' px-3 py-2 rounded-[16px] border-1 border-[#192c26] sticky top-0flex flex-col'>
+                <div className=' px-3 py-2 rounded-[16px] border-1 border-[#192c26] sticky top-0flex mb-4 flex-col'>
                       <div className='flex justify-between'>
                           <p className='font-bold text-xl text-black'>Location</p>
                           <button className="text-xl cursor-pointer font-bold text-red-500">Clear all</button>

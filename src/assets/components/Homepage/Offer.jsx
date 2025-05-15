@@ -3,13 +3,14 @@ import React from 'react'
 const Offer = (props) => {
   return (
     <div>
-      <div className="flex flex-col rounded-[16px] px-6 py-3 border-1 mb-8 border-[#192c26]">
-                <div className="flex justify-between">
+      <div className="flex flex-col rounded-[16px]  px-3 lg:px-6 py-3 border-1 mb-8 border-[#192c26]">
+                <div className="flex lg:flex-row flex-col justify-between">
                     <div className='flex flex-col'>
                         <h1 className='text-black text-xl font-bold' >{props.position}</h1>
-                        <div className="flex">
+                        <div className="flex lg:flex-row flex-col">
                             <p className='font-bold text-[18px] removable' >{props.company}</p>
 
+                        <div className='flex'>
                     {props.tags.map((tag,index)=>(
                             
                     <div className='flex items-center' key={index} > 
@@ -19,6 +20,7 @@ const Offer = (props) => {
                      
                     </div>
                         ))}
+                        </div>
 
                         {props.paid? <div className='flex items-center'> <div className='w-[7px] h-[7px] bg-[#939393] rounded-[50px] mx-3'></div> 
                                           <p className='removable text-[16px] font-bold'>{props.price}</p>  </div>
@@ -32,12 +34,12 @@ const Offer = (props) => {
                     </div>
 
                     <div className='flex flex-col'>
-                        <div className='flex mb-4 '>
+                        <div className='flex mb-2 '>
                             <img src="/icons/Location.svg" alt="" className='mr-3'/>
-                            <p className='font-bold text-[16px]' >{props.location}</p>
+                            <p className='font-bold text-[14px]' >{props.location}</p>
                         </div>
 
-                        <p className='removable font-medium text-[16px]  ' >Posted 2 days ago</p>
+                        <p className='removable font-medium text-[14px]  pl-3 ' >Posted 2 days ago</p>
                     </div>
                 </div>
 
