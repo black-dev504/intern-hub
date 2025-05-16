@@ -14,7 +14,7 @@ const Home = () => {
             <h1 className='text-black text-4xl font-semibold'>Find your perfect IT placement</h1>
             <div className='flex justify-between'>
                 <p className='text-black font-normal mt-1 text-xl'>Browse a variety of Industrial Training (IT) opportunities tailored to your skills and career goals today!</p>
-                <div className='for status line'>{user}</div>
+                <div className='for status line'>{user.email}</div>
                 </div>
         </div>
 

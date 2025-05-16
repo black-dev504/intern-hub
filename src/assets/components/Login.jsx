@@ -13,7 +13,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [skills,setSkills] = useState([])
     const [error, setError] = useState('');
-    const { login } = useAuth();
+    const { user,login,logout } = useAuth();
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -23,32 +23,32 @@ const Login = () => {
     }
     
 
-    const handleSignUp = async (e) =>{
-        e.preventDefault();
-        try{
-            const response = await userSignUp({email,password,skills})
-            navigate('/login')
-        }
-        catch (err){
-            setError(err)
-            console.log(error);
-            
-        }
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await userSignUp({ email, password, skills });
+        setError('')
+        navigate('/login');
+    } catch (err) {
+        const message = err?.response?.data?.error || 'Signup failed';
+        setError(message);
+        console.error(message);
     }
+};
 
-    const handleLogin = async (e) =>{
-        e.preventDefault()
-        try{
-            const response = await userLogin({email,password})
-            login(response.user)
-            navigate('/home')
-        }
-     catch (err) {
-            setError(err);
-            console.log(error);
-            
-     }
+const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+        const response = await userLogin({ email, password });
+        login(response.data.user);
+        navigate('/home');
+    } catch (err) {
+        const message = err?.response?.data?.error || 'Login failed';
+        setError(message);
+        console.error(message);
     }
+};
+
     function addSkill(event) {
         if ((event.key === ' ' || event.key === 'Enter') && event.target.value.trim()) {
             const entry = event.target.value.trim(); 
@@ -92,7 +92,7 @@ const Login = () => {
                 <form className='mt-5 flex flex-col justify-between' onSubmit={signup ? handleSignUp : handleLogin}>
 
                 <div className='mt-5 flex flex-col justify-between'>
-                    {error && <p className='mb-4 text-red-500'>Invalid email or password</p>}
+                    {error && <p className='mb-4 text-red-500'>{error}</p>}
                     <div className='relative'>
                         <input onChange={(e)=> setEmail(e.target.value)} type="text" className='w-full mb-8 border-1 border-[#939393] pl-2 py-3 rounded-[4px] removable' placeholder='example@email.com'/>
                         <label className=" text-[#192c26]  absolute bottom-18 left-4 px-2 font-normal text-[16px] bg-white block" htmlFor="email">Email</label>

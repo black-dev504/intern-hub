@@ -6,6 +6,8 @@ import About from './assets/components/About';
 import Login from './assets/components/Login';
 import Home from './assets/components/Homepage/Home';
 import Editprofile from './assets/components/Profile/Editprofile';
+import Contact from './assets/components/Contact';
+import ProtectedRoute from './Protectedroute';
 
 const AppContent = () => {
   const location = useLocation(); 
@@ -18,8 +20,10 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Login />} />
         <Route path="/about" element={<About />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/editprofile" element={<Editprofile />} />
+        <Route path="/home" element={<ProtectedRoute> <Home /></ProtectedRoute>} />
+        <Route path="/contact" element={<Contact />} />
+
+        <Route path="/editprofile" element={<ProtectedRoute> <Editprofile /></ProtectedRoute>} />
       </Routes>
     </div>
   );
