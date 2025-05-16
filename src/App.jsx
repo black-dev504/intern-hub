@@ -7,6 +7,7 @@ import Login from './assets/components/Login';
 import Home from './assets/components/Homepage/Home';
 import Editprofile from './assets/components/Profile/Editprofile';
 import Contact from './assets/components/Contact';
+import Profile from './assets/components/Profile/Profile';
 import ProtectedRoute from './Protectedroute';
 
 const AppContent = () => {
@@ -20,6 +21,8 @@ const AppContent = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Login />} />
         <Route path="/about" element={<About />} />
+                <Route path="/profile" element={<Profile />} />
+
         <Route path="/home" element={<ProtectedRoute> <Home /></ProtectedRoute>} />
         <Route path="/contact" element={<Contact />} />
 
