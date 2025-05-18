@@ -18,6 +18,6 @@ export const logout = async () => {
   return await api.post('/logout');
 };
 
-export const getProfile = async () => {
-  return await api.get('/profile');
+export const getProfile = async (user) => {
+  return await api.get('/profile',user);
 };

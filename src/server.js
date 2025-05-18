@@ -44,15 +44,38 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
   password: String,
-  skills: [String]
+  skills: [String],
+  profile: {
+    basic_info:{
+      name: {
+        type: String,
+      },
+      title:{
+        type: String,
+      },
+      location:{
+        type: String,
+      },
+      contact:{
+        email: {type: String},
+        number: {type: String},
+        profile_link: {type: String}
+      }
+    },
+    edu:{},
+    certificate:{},
+    portfolio: {},
+    preference: {}
+  }
 });
 
 // Plugin for passport-local-mongoose
 userSchema.plugin(passportLocalMongoose, {
   usernameField: 'email'
+   
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('Userdata', userSchema);
 
 // Passport Configuration
 passport.use(User.createStrategy());
@@ -67,7 +90,7 @@ function ensureAuth(req, res, next) {
 
 // Signup Route
 app.post('/signup', async (req, res) => {
-  const { email, password, skills } = req.body;
+  const { email, password, skills,profile } = req.body;
 
   // Basic password validation
   if (!password || password.length < 6) {
@@ -80,7 +103,7 @@ app.post('/signup', async (req, res) => {
       return res.status(400).json({ error: 'Email already registered' });
     }
 
-    const user = await User.register(new User({ email, skills }), password);
+    const user = await User.register(new User({ email, skills, profile }), password);
 
     // Auto-login after signup
     req.login(user, (err) => {
@@ -94,22 +117,19 @@ app.post('/signup', async (req, res) => {
 });
 
 // Login Route
-app.post('/login', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) return res.status(500).json({ error: err.message });
-    if (!user) return res.status(401).json({ error: 'Invalid email or password' });
-
-    req.login(user, (err) => {
-      if (err) return res.status(500).json({ error: 'Login failed' });
-      res.status(200).json({ message: 'Login successful', user:req.user });
-    
-    });
-  })(req, res, next);
+app.post('/login', passport.authenticate('local'), (req, res) => {
+  const safeUser = {
+    id: req.user._id,
+    email: req.user.email,
+    skills: req.user.skills
+  };
+  res.status(200).json({ message: 'Login successful', user: safeUser });
 });
 
+
 // Protected Profile Route
-app.get('/profile', ensureAuth, (req, res) => {
-  res.status(200).json({ message: 'Authenticated', user: req.user });
+app.get('/profile', ensureAuth, (req, res) => {  
+  res.status(200).json({ message: 'Authenticated', user: req.user.email });
 });
 
 // Logout Route

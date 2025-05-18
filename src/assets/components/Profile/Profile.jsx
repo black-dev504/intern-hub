@@ -1,6 +1,9 @@
 import React from 'react'
+import { useAuth } from '../../../AuthProvider';
 
 const Profile = () => {
+     const {user} = useAuth()
+  
   return (
     <section className='px-5 lg:px-25'>
       <div className="grid lg:grid-cols-2 gap-5">
@@ -40,7 +43,7 @@ const Profile = () => {
                           <img className='max-w-20 max-h-20' src="/icons/phoneicon.svg" alt="" />
                           <div className="flex flex-col text-left md:pl-4 mt-2 md:mt-0">
                               <h1 className=" opacity-90 text-black font-bold text-xl">Phone number</h1>
-                              <p className="text-black text-[16px] font-bold opacity-90 " href="">07000000000</p>
+                              <p className="text-black text-[16px] font-bold opacity-90 ">07000000000</p>
                           </div>
                         </div>
 
@@ -82,7 +85,7 @@ const Profile = () => {
                     <h1 className='text-black font-extrabold text-3xl'>About</h1>
                     <button className='cursor-pointer'><img src="/icons/editicon.svg" alt="" className="w-7 h-7" /></button>
                 </div>
-                <input type="textarea" placeholder='lorem shfdidid ij ijfdohudnf  '/> 
+                <input type="textarea" placeholder={user.email}/> 
               </div>
         </div>
 

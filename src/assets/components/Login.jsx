@@ -26,7 +26,41 @@ const Login = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-        const response = await userSignUp({ email, password, skills });
+        const   profile = {
+    basic_info:{
+      name: 'unknown',
+      title:'unknown',
+      location:'unknown',
+      contact:{
+        email: email,
+        number: 'unknown',
+        profile_link:'unknown',
+      },
+    },
+   edu: {
+  institution: String,
+  degree: String,
+  startYear: String,
+  endYear: String
+},
+certificate: {
+  name: String,
+  issuedBy: String,
+  date: String
+},
+portfolio: {
+  github: String,
+  website: String,
+  projects: [String]
+},
+preference: {
+  remote: Boolean,
+  relocation: Boolean
+}
+      
+    
+  }
+        const response = await userSignUp({ email, password, skills, profile});
         setError('')
         navigate('/login');
     } catch (err) {
