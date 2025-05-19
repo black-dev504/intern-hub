@@ -1,8 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import { useAuth } from '../../../AuthProvider';
 
-const Profile = () => {
+const Profile = (props) => {
      const {user} = useAuth()
+       const [profile, setProfile] = useState(null);
+  const [error, setError] = useState(null);
+
+useEffect(() => {
+    axios.get('http://localhost:5000/profile', { withCredentials: true })
+      .then(res => {
+       
+        
+        setProfile(res.data.user); // Save user/profile locally
+        console.log(profile);
+        
+      })
+      .catch(err => {
+        console.error(err);
+        setError('Failed to load profile');
+      });
+  }, []);
+
+  if (error) return <p>{error}</p>;
+  if (!profile) return <p>Loading profile...</p>;
   
   return (
     <section className='px-5 lg:px-25'>
@@ -20,11 +41,19 @@ const Profile = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <h1 className='text-black font-semibold text-4xl'>Oluwaseun Adebayo</h1>
-                  <h1 className='text-black text-3xl font-normal my-2'>Professional Title  </h1>
+                  <h1 className="text-black font-semibold text-4xl">
+                    {profile.basic_info.name || (
+                      <span className="text-[#939393] italic text-2xl">Name: unknown</span>
+                    )}
+                  </h1>
+                  <h1 className='text-black text-3xl font-normal my-2'>{profile.basic_info.title || (
+                      <span className="text-[#939393] italic text-2xl">Professional title: unknown</span>
+                    )} </h1>
                   <div className='flex mb-2 '>
                       <img src="/icons/Location.svg" alt="" className='mr-3'/>
-                       <p className='font-bold text-[16px]' >Lagos Nigeria</p>
+                       <p className='font-bold text-[16px]' >{profile.basic_info.location || (
+                      <span className="text-[#939393] italic text-2xl">Location: unknown</span>
+                    )}</p>
                   </div>
 
                   <div className="mt-8 flex flex-col">
@@ -34,7 +63,9 @@ const Profile = () => {
                           <img className='max-w-20 max-h-20' src="/icons/profileicon.svg" alt="" />
                           <div className="flex flex-col text-left md:pl-4 mt-2 md:mt-0">
                               <h1 className=" opacity-90 text-black font-bold text-xl">Your Profile</h1>
-                              <a className="text-[#1976D2] text-[16px] font-bold opacity-90 " href="">internshiphut.com/oluwaseun-adebayo</a>
+                              <a className="text-[#1976D2] text-[16px] font-bold opacity-90 " href="">{profile.basic_info.contact.profile_link || (
+                      <span className="text-[#939393] italic text-2xl"> Unknown</span>
+                    )}</a>
                           </div>
                         </div>
                        
@@ -43,15 +74,17 @@ const Profile = () => {
                           <img className='max-w-20 max-h-20' src="/icons/phoneicon.svg" alt="" />
                           <div className="flex flex-col text-left md:pl-4 mt-2 md:mt-0">
                               <h1 className=" opacity-90 text-black font-bold text-xl">Phone number</h1>
-                              <p className="text-black text-[16px] font-bold opacity-90 ">07000000000</p>
+                              <p className="text-black text-[16px] font-bold opacity-90 ">{profile.basic_info.contact.number || (
+                      <span className="text-[#939393] italic text-2xl">Unknown</span>
+                    )}</p>
                           </div>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-center mt-6">
                           <img className='max-w-20 max-h-20' src="/icons/mailicon.svg" alt="" />
-                          <div className="flex flex-col text-left md:pl-4 mt-2 md:mt-0">
+                          <div className="flex flex-col text-left md:pl-4 mt-2 md:mt-0">  
                               <h1 className=" opacity-90 text-black font-bold text-xl">Email</h1>
-                              <a className="text-[#1976D2] text-[16px] font-bold opacity-90 " href="">internshiphut.com/oluwaseun-adebayo</a>
+                              <a className="text-[#1976D2] text-[16px] font-bold opacity-90 " href="">{profile.basic_info.contact.email}</a>
                           </div>
                         </div>
                   </div>

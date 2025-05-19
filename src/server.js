@@ -129,7 +129,7 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
 
 // Protected Profile Route
 app.get('/profile', ensureAuth, (req, res) => {  
-  res.status(200).json({ message: 'Authenticated', user: req.user.email });
+  res.status(200).json({ message: 'Authenticated', user: req.user.profile });
 });
 
 // Logout Route

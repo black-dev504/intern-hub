@@ -28,17 +28,17 @@ const Login = () => {
     try {
         const   profile = {
     basic_info:{
-      name: 'unknown',
-      title:'unknown',
-      location:'unknown',
+      name: String,
+      title: String,
+      location:String,
       contact:{
         email: email,
-        number: 'unknown',
-        profile_link:'unknown',
+        number: String,
+        profile_link:String,
       },
     },
    edu: {
-  institution: String,
+  institution: 'Nil',
   degree: String,
   startYear: String,
   endYear: String
