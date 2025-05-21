@@ -50,16 +50,16 @@ useEffect(() => {
 
             <Basicinfo data={profile.basic_info} onSave={handleSave} />
             <Analytic />
-            <About about={user.email} />
+            <About data={profile.about} onSave={handleSave} />
 
         </div>
 
         {/* col2 */}
         <div className="flex flex-col gap-5">
-            <Eduinfo />
+            <Eduinfo data={profile.edu} onSave={handleSave}/>
             <Competencies data={profile.competencies} onSave={handleSave}/>
-            <Portfolio />
-            <Preference />
+            <Portfolio data={profile.portfolio} onSave={handleSave}/>
+            <Preference data={profile.preference} onSave={handleSave} />
 
 
 

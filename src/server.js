@@ -65,8 +65,18 @@ const userSchema = new mongoose.Schema({
     ],
     skills: [String]
   },
-  portfolio: {},
-  preference: {}
+ portfolio: {
+        resume:String,
+        links:[String]
+        },
+   preference: {
+        intership_type: String,
+        availabiliity: String,
+        },
+    about:{
+        about: String
+    }
+      
 }
 
 });

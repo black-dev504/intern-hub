@@ -38,32 +38,34 @@ const Login = () => {
 
     },
    edu: {
-  institution: 'Nil',
-  degree: String,
-  startYear: String,
-  endYear: String
-},
+        institution: String,
+        degree: String,
+        startYear: String,
+        endYear: String
+    },
 
-competencies:{
-certificates: [
-    {
-  name: String,
-  issuedBy: String,
-  date: String
-}
-],
+   competencies:{
+        certificates: [
+                {
+            name: String,
+            issuedBy: String,
+            date: String
+            }
+            ],
 
-skills :skills
-},
-portfolio: {
-  github: String,
-  website: String,
-  projects: [String]
-},
-preference: {
-  remote: Boolean,
-  relocation: Boolean
-}
+        skills :skills
+    },
+   portfolio: {
+        resume:String,
+        links:[String]
+        },
+   preference: {
+        intership_type: String,
+        availabiliity: String,
+        },
+    about:{
+        about: 'Write short note about yourself'
+    }
       
     
   }
