@@ -21,3 +21,8 @@ export const logout = async () => {
 export const getProfile = async (user) => {
   return await api.get('/profile',user);
 };
+
+export const updateProfile = async (field, data) => {
+  return await api.put(`/profile/${field}`, data );
+};
+

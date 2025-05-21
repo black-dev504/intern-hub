@@ -31,11 +31,11 @@ const Login = () => {
       name: String,
       title: String,
       location:String,
-      contact:{
+    
         email: email,
         number: String,
         profile_link:String,
-      },
+
     },
    edu: {
   institution: 'Nil',
@@ -43,10 +43,17 @@ const Login = () => {
   startYear: String,
   endYear: String
 },
-certificate: {
+
+competencies:{
+certificates: [
+    {
   name: String,
   issuedBy: String,
   date: String
+}
+],
+
+skills :skills
 },
 portfolio: {
   github: String,
@@ -148,7 +155,7 @@ const handleLogin = async (e) => {
                     </div>:null}
                     <div className='inline-block mb-3'>
                     {skills.map((skill,index) =>(
-                      <Skillpills skill={skill} key={index} onRemove={removeSkill}/> 
+                      <Skillpills skill={skill} key={index} onRemove={removeSkill} edit={true}/> 
 
                     ))}
                      </div>

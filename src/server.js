@@ -46,27 +46,29 @@ const userSchema = new mongoose.Schema({
   password: String,
   skills: [String],
   profile: {
-    basic_info:{
-      name: {
-        type: String,
-      },
-      title:{
-        type: String,
-      },
-      location:{
-        type: String,
-      },
-      contact:{
-        email: {type: String},
-        number: {type: String},
-        profile_link: {type: String}
+  basic_info: {
+    name: String,
+    title: String,
+    location: String,
+    email: String,
+    number: String,
+    profile_link: String
+  },
+  edu: {},
+  competencies: {
+    certificates: [
+      {
+        name: String,
+        issuedBy: String,
+        date: String
       }
-    },
-    edu:{},
-    certificate:{},
-    portfolio: {},
-    preference: {}
-  }
+    ],
+    skills: [String]
+  },
+  portfolio: {},
+  preference: {}
+}
+
 });
 
 // Plugin for passport-local-mongoose
@@ -131,6 +133,27 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
 app.get('/profile', ensureAuth, (req, res) => {  
   res.status(200).json({ message: 'Authenticated', user: req.user.profile });
 });
+
+app.put( '/profile/:field' , ensureAuth,async (req,res)=>{
+  
+  const userid = req.user._id;
+  const updateData = req.body
+  
+  
+  
+  
+    try {
+      const entry = req.params.field
+      const update = {}
+      update[`profile.${entry}`] = updateData
+
+      const updatedUser = await User.findByIdAndUpdate(userid, {$set:update}, { new: true });
+      res.status(200).json(updatedUser);
+} catch (err) {
+      res.status(500).json({ error: 'Update failed' });
+}
+
+})
 
 // Logout Route
 app.post('/logout', (req, res) => {
